@@ -4,7 +4,10 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
+      "jasmine",
+      "node_modules/@types/leaflet",
+      "node_modules/@types/leaflet.markercluster",
+      "node_modules/@types/node",
     ]
   },
   "include": [

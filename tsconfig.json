@@ -11,6 +11,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -22,6 +23,11 @@
     "lib": [
       "ES2022",
       "dom"
+    ],
+    "types": ["process"],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
     ]
   },
   "angularCompilerOptions": {

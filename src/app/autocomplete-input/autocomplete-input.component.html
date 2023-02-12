@@ -1,0 +1,11 @@
+<mat-form-field matAutocompleteOrigin #origin="matAutocompleteOrigin">
+  <input type="text" matInput [formControl]="searchControl" (change)="searchTermChanged()"
+         [matAutocomplete]="auto"
+         [matAutocompleteConnectedTo]="origin"
+  >
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let suggestion of suggestions" [value]="suggestion">
+      {{ suggestion }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
