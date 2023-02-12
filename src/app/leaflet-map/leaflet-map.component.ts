@@ -45,7 +45,7 @@ export class LeafletMapComponent {
   latitude: number = 46.879966;
   longitude: number = 12.040209;
   radius: number = 10;
-  circleSelectorMarker: RectangleMarker = new RectangleMarker(latLngBounds([[46.879966, -121.726909], [46.879966, -121.726909]]), {
+  selectedRectangleMarker: RectangleMarker = new RectangleMarker(latLngBounds([[46.879966, -121.726909], [46.879966, -121.726909]]), {
     color: 'red'
   }, 'main');/*new CircleMetaMarker(latLng(this.latitude, this.longitude), {
     radius: this.radius
@@ -59,11 +59,11 @@ export class LeafletMapComponent {
   zoomEnd() {
     // const radiusInPixels = this.getRadiusInPixels(this.radius);
     const boundingBox = generateBoundingBox(this.latitude, this.longitude, this.radius);
-    this.circleSelectorMarker.setBounds([
+    this.selectedRectangleMarker.setBounds([
       [boundingBox.minLatitude, boundingBox.minLongitude],
       [boundingBox.maxLatitude, boundingBox.maxLongitude],
     ])
-    // this.circleSelectorMarker.setRadius(radiusInPixels);
+    // this.selectedRectangleMarker.setRadius(radiusInPixels);
   }
 
   getRadiusInPixels(radiusInMeters: number) {
@@ -75,7 +75,7 @@ export class LeafletMapComponent {
   }
   ngOnInit() {
 
-    this.layers.push(this.circleSelectorMarker);
+    this.layers.push(this.selectedRectangleMarker);
 
 
     const gridPoints = generateGridPoints(this.center[0], this.center[1], 5000, this.CACHE_ZOOM_LEVEL);
@@ -95,7 +95,7 @@ export class LeafletMapComponent {
         this.layers.splice(i, 1);
       }
     }
-    const selectionBounds = this.circleSelectorMarker.getBounds();
+    const selectionBounds = this.selectedRectangleMarker.getBounds();
     for (let i = 0; i < this.layers.length; i++){
       const layer = this.layers[i];
       let otherLayer:PointMarker|undefined;
@@ -130,13 +130,13 @@ export class LeafletMapComponent {
   }
 
   updateMarkerByForm() {
-    //this.circleSelectorMarker.setLatLng(latLng(this.latitude, this.longitude));
+    //this.selectedRectangleMarker.setLatLng(latLng(this.latitude, this.longitude));
     this.zoomEnd();
   }
 
   updateMarker(lat: number, lng: number) {
 
-    //this.circleSelectorMarker.setLatLng(latLng(lat, lng));
+    //this.selectedRectangleMarker.setLatLng(latLng(lat, lng));
   }
   updateMarkerClick(event: LeafletMouseEvent) {
     //this.updateMarker(event.latlng.lat, event.latlng.lng);

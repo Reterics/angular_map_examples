@@ -2,6 +2,9 @@
 
 This is an example project how can we create Leaflet Maps, using calculations, creating components in Angular 15.
 
+![Screenshot from /map](screenshot.png)
+
+
 ## Gettings started
 
 After you downloaded the project copy config.ts.example to config.ts and modify its content according to your configuration.
