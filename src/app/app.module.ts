@@ -14,7 +14,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { AutocompleteInputComponent } from './autocomplete-input/autocomplete-input.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {HttpClientModule} from "@angular/common/http";
-import {GoogleMapsAPIService} from "./services/google.maps.api.service";
+import {IndexedDBModule} from "./services/indexed-db/indexed.db.module";
+import {GoogleMapsAPIModule} from "./services/google-api/google.maps.api.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import {GoogleMapsAPIService} from "./services/google.maps.api.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    IndexedDBModule,
+    GoogleMapsAPIModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

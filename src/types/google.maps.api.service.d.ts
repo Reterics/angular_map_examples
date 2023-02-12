@@ -1,3 +1,8 @@
+export interface CachedGeoCoder extends GeoCoderResponse {
+  id: string
+  time?: number
+}
+
 export interface GeoCoderResponse {
   status: string
   results: GeoCoderResult[]
