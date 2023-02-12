@@ -21,13 +21,16 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import { HomeComponentComponent } from './pages/home-component/home-component.component';
+import { LayersDialogComponent } from './components/layers-dialog/layers-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
     LeafletMapComponent,
     AutocompleteInputComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+    LayersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { HomeComponentComponent } from './pages/home-component/home-component.co
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [
     IndexedDBModule,

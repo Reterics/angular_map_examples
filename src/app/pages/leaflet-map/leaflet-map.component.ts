@@ -7,14 +7,16 @@ import {
   icon,
   MarkerClusterGroupOptions,
   LeafletMouseEvent,
-  CircleMarker, latLngBounds, Rectangle, bounds
+  CircleMarker, latLngBounds, Rectangle, bounds, Control, DomEvent, DomUtil
 } from 'leaflet';
 import 'leaflet.markercluster';
 import { markerClusterGroup, MarkerCluster, Map } from 'leaflet';
 import {generateBoundingBox, generateGridPoints, radiusToGPSDifference} from "../../lib/coordinateModule";
 import {PointMarker} from "./PointMarker";
-import {CircleMetaMarker} from "./CircleMetaMarker";
 import {RectangleMarker} from "./RectangleMarker";
+import {LayersDialogComponent} from "../../components/layers-dialog/layers-dialog.component";
+import {LocalLayer} from "../../../types/maps";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 const earthRadius = 6371; // Earth's radius in kilometers
 
@@ -39,7 +41,7 @@ export class LeafletMapComponent {
     center: latLng([this.center[0], this.center[1]])
   };
 
-  layers: (PointMarker|CircleMetaMarker|RectangleMarker)[] = [];
+  layers: (PointMarker|RectangleMarker)[] = [];
 
   cellSize: number = Math.pow(2, 20 - this.CACHE_ZOOM_LEVEL) / earthRadius;
   latitude: number = 46.879966;
@@ -52,8 +54,55 @@ export class LeafletMapComponent {
   }, 'pointer');*/
 
   map: Map | undefined;
+  private layerDialog: MatDialogRef<LayersDialogComponent, any> | undefined;
+
+  constructor(private dialog: MatDialog) {
+
+  }
   onMapReady(map: Map) {
     this.map = map;
+
+    const leafletControl = new Control({ position: 'topright' });
+    leafletControl.onAdd = map => {
+      const button = DomUtil.create('button', 'layer-control');
+      button.innerHTML = 'Layers';
+      DomEvent.addListener(button, 'click', (event) => {
+        this.openLayers();
+      });
+      return button;
+    };
+    leafletControl.addTo(map);
+  }
+
+  openLayers()  {
+
+    this.layerDialog = this.dialog.open(LayersDialogComponent,{
+      disableClose: true,
+        hasBackdrop: false,
+        position: {
+        right: "0"
+      }
+    });
+    if (this.layerDialog) {
+      this.layers.forEach((layer,i)=>{
+        if(!(layer instanceof PointMarker)) {
+          let name = "Layer";
+          if (layer instanceof RectangleMarker) {
+            name = "Rectangle Layer";
+          }
+
+          this.layerDialog?.componentInstance.localLayers.push({
+            id: i,
+            name: name,
+            marker: layer
+          });
+          this.layerDialog?.componentInstance.layerList.push(name);
+
+          console.error(this.layerDialog?.componentInstance.localLayers);
+        }
+      });
+    }
+
   }
 
   zoomEnd() {
@@ -73,6 +122,7 @@ export class LeafletMapComponent {
     }
     return 0;
   }
+
   ngOnInit() {
 
     this.layers.push(this.selectedRectangleMarker);
@@ -120,6 +170,7 @@ export class LeafletMapComponent {
       }
     }
   }
+
   markerClusterReady(markerCluster: MarkerCluster) {
     // Do stuff with group
   }
@@ -138,6 +189,7 @@ export class LeafletMapComponent {
 
     //this.selectedRectangleMarker.setLatLng(latLng(lat, lng));
   }
+
   updateMarkerClick(event: LeafletMouseEvent) {
     //this.updateMarker(event.latlng.lat, event.latlng.lng);
     this.latitude = event.latlng.lat;
@@ -145,6 +197,5 @@ export class LeafletMapComponent {
     this.zoomEnd();
 
   }
-
 
 }

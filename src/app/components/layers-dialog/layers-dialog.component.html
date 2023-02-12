@@ -1,0 +1,29 @@
+<div id="myHeader" class="modal-header">
+  <span class="layers-close" mat-button mat-dialog-close>X</span>
+
+  <h3 class="title" (mousedown)="dragMouseDown($event)">Layers</h3>
+</div>
+
+<div class="modal-body">
+  <div class="layer-list">
+
+      <div *ngFor="let layer of localLayers" class="layer-row">
+        <div>{{layer.id}}</div>
+        <div>{{layer.name}}</div>
+        <div class="actions">
+          <div *ngIf="layer.marker.isVisible" (click)="hideMarker(layer.marker)">
+            <mat-icon>visibility</mat-icon>
+          </div>
+
+          <div *ngIf="!layer.marker.isVisible" (click)="showMarker(layer.marker)">
+            <mat-icon>visibility_off</mat-icon>
+          </div>
+
+          <div (click)="deleteLayer(layer)">
+            <mat-icon>delete</mat-icon>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
