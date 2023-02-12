@@ -19,6 +19,14 @@ npm install
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Roadmap
+
+Since the base components, pages and Services are ready the practice plan is the following:
+ - Integrating more Google Cloud APIs
+ - Layer management on the map
+
+![GeoCoder IndexDB Cache](screenshot_maps.png)
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

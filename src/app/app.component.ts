@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'map_project';
+  navigationItems = [
+    { label: 'Home', route: '/home' },
+    { label: 'Leaflet Map', route: '/map' }
+  ];
 }

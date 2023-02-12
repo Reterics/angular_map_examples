@@ -11,7 +11,7 @@ import {
 } from 'leaflet';
 import 'leaflet.markercluster';
 import { markerClusterGroup, MarkerCluster, Map } from 'leaflet';
-import {generateBoundingBox, generateGridPoints, radiusToGPSDifference} from "../lib/coordinateModule";
+import {generateBoundingBox, generateGridPoints, radiusToGPSDifference} from "../../lib/coordinateModule";
 import {PointMarker} from "./PointMarker";
 import {CircleMetaMarker} from "./CircleMetaMarker";
 import {RectangleMarker} from "./RectangleMarker";
@@ -78,7 +78,7 @@ export class LeafletMapComponent {
     this.layers.push(this.selectedRectangleMarker);
 
 
-    const gridPoints = generateGridPoints(this.center[0], this.center[1], 5000, this.CACHE_ZOOM_LEVEL);
+    const gridPoints = generateGridPoints(this.center[0], this.center[1], 500, this.CACHE_ZOOM_LEVEL);
     console.error(gridPoints);
     gridPoints.map(gridPoints=>this.layers.push(new PointMarker(
       latLng(gridPoints.lat, gridPoints.lon), {}, 'grid')));

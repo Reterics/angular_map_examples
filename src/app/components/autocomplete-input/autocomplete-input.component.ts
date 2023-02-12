@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import {mergeMap, Observable, of, Subscription} from "rxjs";
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import {GoogleMapsAPIService} from "../services/google-api/google.maps.api.service";
+import {GoogleMapsAPIService} from "../../services/google-api/google.maps.api.service";
 
 
 @Component({

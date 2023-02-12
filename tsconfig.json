@@ -24,7 +24,7 @@
       "ES2022",
       "dom"
     ],
-    "types": ["process"],
+    "types": ["jest"],
     "typeRoots": [
       "node_modules/@types",
       "src/types"

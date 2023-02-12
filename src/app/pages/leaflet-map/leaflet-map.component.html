@@ -1,0 +1,38 @@
+<div class="toolbar-form">
+  <form>
+    <mat-form-field appearance="outline" >
+      <mat-label>Latitude</mat-label>
+      <input matInput type="number" [(ngModel)]="latitude" name="latitude" placeholder="Latitude">
+      <mat-icon matSuffix>location_on</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Longitude</mat-label>
+      <input matInput type="number" [(ngModel)]="longitude" name="longitude" placeholder="Longitude">
+      <mat-icon matSuffix>location_on</mat-icon>
+
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Radius (meters)</mat-label>
+      <input matInput type="number" [(ngModel)]="radius" name="radius" placeholder="Radius">
+    </mat-form-field>
+    <button mat-raised-button (click)="updateMarkerByForm()">Update Marker</button>
+    <button mat-raised-button (click)="activateIntersectingPoints()">Check Intersections</button>
+  </form>
+</div>
+
+<div leaflet
+     [leafletLayers]="layers"
+     [leafletOptions]="options"
+     (leafletDoubleClick)="updateMarkerClick($event)"
+     (leafletMapZoomEnd)="zoomEnd()"
+     (leafletMapReady)="onMapReady($event)"
+     class="leaflet-outer" style="
+  height: 70vh;
+  min-height: 400px;"
+></div>
+
+<form>
+  <app-autocomplete-input>
+
+  </app-autocomplete-input>
+</form>
